@@ -23,9 +23,9 @@ Getting Started
 
 To get a local copy of Snap up and running, follow these steps:
 
-    Clone the repository:
+Clone the repository:
 
-git clone https://github.com/your-username/snap.git
+    git clone https://github.com/your-username/snap.git
 
 Navigate into the project directory:
 
@@ -34,12 +34,10 @@ Navigate into the project directory:
 Open index.html in your preferred web browser to start using Snap.
 
 Contributing
-
 Contributions are welcome! If you have suggestions for new features, improvements, or find any issues, please open an issue or submit a pull request.
+
 License
-
 This project is licensed under the MIT License.
-
 
 Inspired by the need for enhanced remote team collaboration.
    
