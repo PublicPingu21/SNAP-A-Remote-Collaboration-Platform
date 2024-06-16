@@ -25,13 +25,9 @@ To get a local copy of Snap up and running, follow these steps:
 
     Clone the repository:
 
-    bash
-
 git clone https://github.com/your-username/snap.git
 
 Navigate into the project directory:
-
-bash
 
     cd snap
 
@@ -43,7 +39,7 @@ Contributions are welcome! If you have suggestions for new features, improvement
 License
 
 This project is licensed under the MIT License.
-Acknowledgements
+
 
     Inspired by the need for enhanced remote team collaboration.
-    Special thanks to [Your Name] for guidance and support.
+   
