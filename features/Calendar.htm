@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features - Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image:url("images/p2.jpg");
+      background-size:cover;
+      background-repeat: no-repeat;
+      background-position:center center;
+    }
+
+    .calendar {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      position: absolute;
+      top:20px;
+      right:275px;
+    }
+
+    .month {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .month button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .weekdays {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .weekdays span {
+      width: calc(100% / 7);
+      text-align: center;
+      color: #666;
+      font-weight: bold;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 40px);
+      gap: 5px;
+    }
+
+    .days span {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .days span:hover {
+      background-color: #eee;
+    }
+
+    .days span.today {
+      background-color: #ffd700;
+      color: #fff;
+    }
+
+    .event {
+      background-color: #4285f4;
+      color: #fff;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="month">
+      <button id="prevMonth">&lt;</button>
+      <span id="monthYear"></span>
+      <button id="nextMonth">&gt;</button>
+    </div>
+    <div class="weekdays" id="weekdays"></div>
+    <div class="days" id="days"></div>
+  </div>
+  <script>
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const calendar = document.querySelector('.calendar');
+    const monthYearElement = document.getElementById('monthYear');
+    const weekdaysElement = document.getElementById('weekdays');
+    const daysElement = document.getElementById('days');
+    const prevMonthButton = document.getElementById('prevMonth');
+    const nextMonthButton = document.getElementById('nextMonth');
+
+    let currentYear, currentMonth;
+
+    function generateCalendar(year, month) {
+      currentYear = year;
+      currentMonth = month;
+
+      monthYearElement.textContent = months[month] + ' ' + year;
+
+      let startDate = new Date(year, month, 1);
+      let endDate = new Date(year, month + 1, 0);
+      let startDay = startDate.getDay();
+
+      weekdaysElement.innerHTML = '';
+      daysElement.innerHTML = '';
+
+      for (let i = 0; i < weekdays.length; i++) {
+        const weekday = document.createElement('span');
+        weekday.textContent = weekdays[i];
+        weekdaysElement.appendChild(weekday);
+      }
+
+      for (let i = 0; i < startDay; i++) {
+        const emptyDay = document.createElement('span');
+        daysElement.appendChild(emptyDay);
+      }
+
+      for (let i = 1; i <= endDate.getDate(); i++) {
+        const day = document.createElement('span');
+        day.textContent = i;
+        daysElement.appendChild(day);
+
+        day.addEventListener('click', () => {
+          const clickedDate = new Date(year, month, i);
+          handleDayClick(clickedDate);
+        });
+
+        if (i === new Date().getDate() && year === new Date().getFullYear() && month === new Date().getMonth()) {
+          day.classList.add('today');
+        }
+      }
+    }
+
+    function handleDayClick(date) {
+      const formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      alert(`Clicked on ${formattedDate}`);
+      // You can perform additional actions here based on the clicked date
+    }
+
+    function showPrevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      generateCalendar(currentYear, currentMonth);
+    }
+
+    function showNextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      generateCalendar(currentYear, currentMonth);
+    }
+
+    prevMonthButton.addEventListener('click', showPrevMonth);
+    nextMonthButton.addEventListener('click', showNextMonth);
+
+    const today = new Date();
+    generateCalendar(today.getFullYear(), today.getMonth());
+  </script>
+</body>
+</html>

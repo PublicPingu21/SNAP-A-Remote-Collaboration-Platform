@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reminder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image:url("images/p1.jpg");
+      background-size:cover;
+      padding-top: 60px;
+    }
+
+    .navbar {
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .card {
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      background-color: #343a40;
+      color: #fff;
+      border-bottom: 2px solid #212529;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+    }
+
+    .form-control {
+      border-radius: 6px;
+    }
+
+    .input-group-text {
+      background-color: #6c757d;
+      border-color: #6c757d;
+      color: #fff;
+      border-radius: 6px;
+    }
+
+    .reminder-item {
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      background-color: #fff;
+      padding: 10px;
+    }
+
+    .reminder-item .text {
+      word-wrap: break-word;
+    }
+
+    .actions {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Reminder</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mt-5">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-header text-center">
+          <h1 class="card-title">Set a Reminder</h1>
+        </div>
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input type="text" id="reminderInput" class="form-control" placeholder="Enter your reminder">
+            <button onclick="setReminder()" class="btn btn-primary">Set Reminder</button>
+          </div>
+          <div id="reminderList"></div>
+          <div class="text-center mt-3">
+            <button onclick="clearAllReminders()" class="btn btn-secondary">Clear All Reminders</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    // Function to get reminders from local storage
+    function getRemindersFromStorage() {
+      return JSON.parse(localStorage.getItem('reminders')) || [];
+    }
+
+    // Function to save reminders to local storage
+    function saveRemindersToStorage(reminders) {
+      localStorage.setItem('reminders', JSON.stringify(reminders));
+    }
+
+    // Function to display reminders
+    function displayReminders() {
+      const reminders = getRemindersFromStorage();
+      const reminderList = document.getElementById('reminderList');
+      reminderList.innerHTML = '';
+
+      reminders.forEach(reminderText => {
+        const reminder = createReminderElement(reminderText);
+        reminderList.appendChild(reminder);
+      });
+    }
+
+    // Function to create reminder element
+    function createReminderElement(reminderText) {
+      const reminder = document.createElement('div');
+      reminder.classList.add('reminder-item', 'mb-2', 'p-2');
+      reminder.innerHTML = `
+        <div class="text">${reminderText}</div>
+        <div class="actions">
+          <button class="btn btn-success btn-sm" onclick="markCompleted(this)">Done</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteReminder(this)">Delete</button>
+        </div>
+      `;
+      return reminder;
+    }
+
+    // Load existing reminders on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      displayReminders();
+    });
+
+    // Function to set a reminder
+    function setReminder() {
+      const reminderInput = document.getElementById('reminderInput');
+      const reminders = getRemindersFromStorage();
+
+      if (reminderInput.value.trim() !== '') {
+        reminders.push(reminderInput.value.trim());
+        saveRemindersToStorage(reminders);
+
+        const reminderList = document.getElementById('reminderList');
+        const reminder = createReminderElement(reminderInput.value.trim());
+        reminderList.appendChild(reminder);
+        
+        reminderInput.value = '';
+      } else {
+        alert('Please enter a valid reminder!');
+      }
+    }
+
+    // Function to mark a reminder as completed
+    function markCompleted(button) {
+      const reminderItem = button.closest('.reminder-item');
+      reminderItem.querySelector('.text').style.textDecoration = 'line-through';
+    }
+
+    // Function to delete a reminder
+    function deleteReminder(button) {
+      const reminderItem = button.closest('.reminder-item');
+      const reminderText = reminderItem.querySelector('.text').innerText;
+      const reminders = getRemindersFromStorage();
+      const updatedReminders = reminders.filter(reminder => reminder !== reminderText);
+      saveRemindersToStorage(updatedReminders);
+      reminderItem.remove();
+    }
+
+    // Function to clear all reminders
+    function clearAllReminders() {
+      localStorage.removeItem('reminders');
+      const reminderList = document.getElementById('reminderList');
+      reminderList.innerHTML = '';
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

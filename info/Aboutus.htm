@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-image:url("images/p1.webp");
+      background-size:cover;
+    }
+
+    header {
+      background-color: #056bec;
+      color: #fff ;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .about {
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .btn-primary {
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+	
+	.btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px; /* Adjust margin as needed */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Us</h1>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Welcome to SNAP </h2>
+              <p class="card-text">We are a team of passionate individuals dedicated to providing excellent products/services.</p>
+              <p class="card-text">Our mission is to make innovative projects to make life a little bit easier and comfortable.</p>
+              <div class="btn-container">
+			  <button id="readMoreBtn" class="btn btn-primary">Read More</button>
+              </div>
+			  <p id="moreInfo" class="hidden mt-3">We pride ourselves on innovation, dedication, and excellence. Established with a passion for transforming ideas into reality, we specialize in providing cutting-edge solutions that cater to our clients' diverse needs. Our team of skilled professionals is committed to delivering high-quality services and products, leveraging the latest technologies and industry best practices. With a customer-centric approach at our core, we strive to build lasting partnerships, ensuring satisfaction and success for all those we serve. We are driven by a relentless pursuit of innovation and a commitment to exceeding expectations, empowering businesses to thrive in an ever-evolving landscape.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+    document.getElementById('readMoreBtn').addEventListener('click', function() {
+      var moreInfo = document.getElementById('moreInfo');
+      if (moreInfo.classList.contains('hidden')) {
+        moreInfo.classList.remove('hidden');
+        document.getElementById('readMoreBtn').textContent = 'Read Less';
+      } else {
+        moreInfo.classList.add('hidden');
+        document.getElementById('readMoreBtn').textContent = 'Read More';
+      }
+    });
+  </script>
+</body>
+</html>
