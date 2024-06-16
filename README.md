@@ -15,9 +15,10 @@ Advanced Planning Tools
 Plan and strategize effectively with Snap's advanced planning capabilities, helping streamline workflows and achieve team goals efficiently.
 
 Technologies Used
-HTML: Structured the layout and content of Snap.
-CSS: Styled the user interface to provide an intuitive user experience.
-JavaScript: Implemented interactive features and functionality for dynamic task management, calendar integration, reminders, and planning tools.
+
+    HTML: Structured the layout and content of Snap.
+    CSS: Styled the user interface to provide an intuitive user experience.
+    JavaScript: Implemented interactive features and functionality for dynamic task management, calendar integration, reminders, and planning tools.
 
 
 Getting Started
