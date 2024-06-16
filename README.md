@@ -31,7 +31,7 @@ Navigate into the project directory:
 
     cd snap
 
-    Open index.html in your preferred web browser to start using Snap.
+Open index.html in your preferred web browser to start using Snap.
 
 Contributing
 
@@ -41,5 +41,5 @@ License
 This project is licensed under the MIT License.
 
 
-    Inspired by the need for enhanced remote team collaboration.
+Inspired by the need for enhanced remote team collaboration.
    
